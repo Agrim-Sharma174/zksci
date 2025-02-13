@@ -1,0 +1,6 @@
+[package]
+name = "zkHackNoir"
+type = "bin"
+authors = [""]
+
+[dependencies]

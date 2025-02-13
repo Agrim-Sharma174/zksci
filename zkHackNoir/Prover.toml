@@ -1,0 +1,17 @@
+# Public inputs (target variant)
+target_chromosome = "1"
+target_position = "1000"
+target_ref_allele = "0"  # A
+target_alt_allele = "3"  # G
+
+# Private inputs (participant 1)
+participant1.chromosome = "1"
+participant1.position = "1000"
+participant1.ref_allele = "0"
+participant1.alt_allele = "3"
+
+# Private inputs (participant 2)
+participant2.chromosome = "1"
+participant2.position = "1000"
+participant2.ref_allele = "0"  # C
+participant2.alt_allele = "3"  # T
