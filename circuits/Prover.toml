@@ -1,0 +1,28 @@
+target_alt_allele = "1"
+target_ref_allele = "2"
+tgt_chromosome = "3"
+tgt_position = "4"
+
+[participant1]
+alt_allele = "1"
+chromosome = "3"
+position = "4"
+ref_allele = "2"
+
+[participant2]
+alt_allele = "1"
+chromosome = "3"
+position = "4"
+ref_allele = "2"
+
+[participant3]
+alt_allele = "1"
+chromosome = "3"
+position = "4"
+ref_allele = "2"
+
+[participant4]
+alt_allele = "1"
+chromosome = "3"
+position = "4"
+ref_allele = "2"

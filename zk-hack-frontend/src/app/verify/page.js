@@ -1,108 +1,3 @@
-// 'use client';
-// import { useState } from 'react';
-// import { ethers } from 'ethers';
-
-// export default function VerifyPage() {
-//   const [attestationData, setAttestationData] = useState(null);
-//   const [walletAddress, setWalletAddress] = useState(null);
-//   const [txStatus, setTxStatus] = useState(null);
-//   const [contractAddress, setContractAddress] = useState(""); // User-supplied contract address
-
-//   // Minimal ABI for contract verification
-//   const contractABI = [
-//     "function checkHash(bytes32 _hash, uint256 _attestationId, bytes32[] calldata _merklePath, uint256 _leafCount, uint256 _index) public"
-//   ];
-
-//   const handleFileChange = (e) => {
-//     const file = e.target.files[0];
-//     if (!file) return;
-//     const reader = new FileReader();
-//     reader.onload = (event) => {
-//       try {
-//         const json = JSON.parse(event.target.result);
-//         setAttestationData(json);
-//       } catch (err) {
-//         alert("Invalid JSON file.");
-//       }
-//     };
-//     reader.readAsText(file);
-//   };
-
-//   const connectWallet = async () => {
-//     if (typeof window.ethereum === 'undefined') {
-//       alert("Please install MetaMask.");
-//       return;
-//     }
-//     try {
-//       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-//       setWalletAddress(accounts[0]);
-//     } catch (err) {
-//       console.error(err);
-//       alert("Wallet connection failed.");
-//     }
-//   };
-
-//   const verifyAttestation = async () => {
-//     if (!walletAddress || !attestationData || !contractAddress) {
-//       alert("Please connect wallet, upload attestation, and enter contract address.");
-//       return;
-//     }
-
-//     try {
-//       const provider = new ethers.providers.Web3Provider(window.ethereum); // Using Web3Provider to interact with the Ethereum provider
-//       const signer = await provider.getSigner();
-//       const contract = new ethers.Contract(contractAddress, contractABI, signer);
-
-//       const tx = await contract.checkHash(
-//         attestationData.leaf,
-//         attestationData.attestationId,
-//         attestationData.proof,
-//         attestationData.numberOfLeaves,
-//         attestationData.leafIndex
-//       );
-
-//       setTxStatus("Transaction Sent: " + tx.hash);
-//       await tx.wait();
-//       setTxStatus("Attestation Verified!");
-//     } catch (err) {
-//       console.error(err);
-//       setTxStatus("Verification Failed: " + err.message);
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <h1 className="text-2xl font-bold mb-4">Verify Attestation</h1>
-
-//       <button onClick={connectWallet} className="bg-blue-500 text-white px-4 py-2 rounded mb-4">
-//         {walletAddress ? `Connected: ${walletAddress.slice(0, 6)}...` : "Connect Wallet"}
-//       </button>
-
-//       <input
-//         type="file"
-//         accept=".json"
-//         onChange={handleFileChange}
-//         className="block border p-2 mb-4"
-//       />
-
-//       <input
-//         type="text"
-//         placeholder="Enter contract address"
-//         value={contractAddress}
-//         onChange={(e) => setContractAddress(e.target.value)}
-//         className="block border p-2 mb-4 w-full"
-//       />
-
-//       <button onClick={verifyAttestation} className="bg-green-500 text-white px-4 py-2 rounded">
-//         Verify Attestation
-//       </button>
-
-//       {txStatus && <p className="mt-4">{txStatus}</p>}
-//     </div>
-//   );
-// }
-
-
 'use client';
 import { useState } from 'react';
 import { ethers } from 'ethers';
@@ -181,11 +76,11 @@ export default function VerifyPage() {
           <h1 className="text-3xl font-bold text-gray-900">Verify Attestation</h1>
           <p className="mt-2 text-gray-600">Verify the authenticity of genomic data attestations on the blockchain</p>
         </div>
-        
+
         <div className="space-y-8">
           <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-6">
-            <button 
-              onClick={connectWallet} 
+            <button
+              onClick={connectWallet}
               className="w-full bg-gradient-to-r from-purple-900 to-blue-900 hover:from-purple-800 hover:to-blue-800 text-white font-medium py-4 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center"
             >
               <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -246,7 +141,7 @@ export default function VerifyPage() {
             </div>
           </div>
 
-          <button 
+          <button
             onClick={verifyAttestation}
             disabled={!walletAddress || !attestationData || !contractAddress}
             className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-medium py-4 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
@@ -258,13 +153,12 @@ export default function VerifyPage() {
           </button>
 
           {txStatus && (
-            <div className={`rounded-lg p-4 ${
-              txStatus.includes("Failed") 
-                ? "bg-red-50 text-red-900 border border-red-200" 
-                : txStatus.includes("Verified") 
+            <div className={`rounded-lg p-4 ${txStatus.includes("Failed")
+                ? "bg-red-50 text-red-900 border border-red-200"
+                : txStatus.includes("Verified")
                   ? "bg-green-50 text-green-900 border border-green-200"
                   : "bg-blue-50 text-blue-900 border border-blue-200"
-            }`}>
+              }`}>
               <div className="flex items-center">
                 {txStatus.includes("Failed") ? (
                   <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
